@@ -1,0 +1,10 @@
+<h1>List Your Desk</h1>
+
+<%= simple_form_for @desk do |f| %>
+  <%= f.input :title %>
+  <%= f.input :description %>
+  <%= f.input :price_per_hour %>
+  <%= f.input :address %>
+
+  <%= f.button :submit, "Create Desk" %>
+<% end %>
