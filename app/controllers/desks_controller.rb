@@ -14,6 +14,14 @@ class DesksController < ApplicationController
     end
   end
 
+  def update
+    @desk = Desk.find(params[:id])
+    if @desk.update(desk_params)
+      redirect_to @desk, notice: 'Desk was successfully updated.'
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
   private
 
   def desk_params
