@@ -1,0 +1,10 @@
+<h1>DeskBnB</h1>
+<h2>Here you can see all the desks available</h2>
+<ul>
+  <% @desks.each do |desk| %>
+   <li><h3><%= desk.title %></h3>
+      <p>location: <%= desk.address %> - price per hour: <%= desk.price_per_hour %> € </p>
+      <p><%= link_to desk.title, desk_path(desk) %></p>
+   </li>
+  <% end %>
+</ul>
