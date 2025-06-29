@@ -1,10 +1,20 @@
-<h1>DeskBnB</h1>
-<h2>Here you can see all the desks available</h2>
-<ul>
-  <% @desks.each do |desk| %>
-   <li><h3><%= desk.title %></h3>
-      <p>location: <%= desk.address %> - price per hour: <%= desk.price_per_hour %> € </p>
-      <p><%= link_to desk.title, desk_path(desk) %></p>
-   </li>
-  <% end %>
-</ul>
+<div class="container text-center">
+  <h1>DeskBnB</h1>
+  <h2>Book - Study - Work</h2>
+</div>
+
+<div class="container text-center py-5">
+  <div class="row row-cols-3">
+    <% @desks.each do |desk| %>
+      <div class="col">
+        <h3><%= desk.title %></h3>
+        <p>location: <%= desk.address %> - price per hour: <%= desk.price_per_hour %> € </p>
+        <p><%= link_to "See the desk in details", desk_path(desk) %></p>
+        </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="container text-center py-5">
+  <p><%= link_to "Create a new desk", new_desk_path %></p>
+</div>

@@ -8,6 +8,8 @@
 
 <p> Host: <%= @desk.user.name %></p>
 
+<p><%= link_to "back to all desks", desks_path %></p>
+
 <p> All Reviews:</p>
 <ul>
   <% @desk.reviews.each do |review| %>
@@ -25,3 +27,4 @@
 <% if flash[:alert] %>
   <div class="alert"> <%= flash[:alert] %> </div>
 <% end %>
+
