@@ -8,9 +8,10 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
+Review.destroy_all
 Booking.destroy_all
-User.destroy_all
 Desk.destroy_all
+User.destroy_all
 
 puts "creating users..."
 
@@ -22,22 +23,76 @@ axel = User.create!(name: "Axel", email: "axel@example.com", password: "12345678
 
 puts "Users created !"
 
-puts "created desks"
+puts "creating desks ..."
 
-brussels_desk = Desk.create!(title: "Brussels", description: "nice and cosy desk", price_per_hour: 3.5, address: "Brussels", user_id: axel.id)
+brussels_desk = Desk.create!(
+  title: "Brussels",
+  description: "nice and cosy desk",
+  price_per_hour: 3.5,
+  address: "Brussels",
+  user_id: axel.id
+)
 
-utrecht_desk = Desk.create!(title: "Utrecht", description: "nice and cosy desk", price_per_hour: 3.5, address: "Utrecht", user_id: ana.id)
+utrecht_desk = Desk.create!(
+  title: "Utrecht",
+  description: "nice and cosy desk",
+  price_per_hour: 3.5,
+  address: "Utrecht",
+  user_id: ana.id
+)
 
-paris_desk = Desk.create!(title: "Paris", description: "nice and cosy desk", price_per_hour: 5, address: "Paris", user_id: helene.id)
+paris_desk = Desk.create!(
+  title: "Paris",
+  description: "nice and cosy desk",
+  price_per_hour: 5,
+  address: "Paris",
+  user_id: helene.id
+)
 
 puts "created desks !"
 
 puts "creating bookings ..."
 
-paris_booking = Booking.create!(user_id: ana.id, desk_id: paris_desk.id, start_time: Time.now, end_time: Time.now + 2.hours, status: 0)
+paris_booking = Booking.create!(
+  user_id: ana.id,
+  desk_id: paris_desk.id,
+  start_time: Time.now,
+  end_time: Time.now + 2.hours,
+  status: 0
+)
 
-utrecht_booking = Booking.create!(user_id: axel.id, desk_id: utrecht_desk.id, start_time: Time.now, end_time: Time.now + 2.hours, status: 1)
+utrecht_booking = Booking.create!(
+  user_id: axel.id,
+  desk_id: utrecht_desk.id,
+  start_time: Time.now,
+  end_time: Time.now + 2.hours,
+  status: 1
+)
 
-brussels_booking = Booking.create!(user_id: helene.id, desk_id: brussels_desk.id, start_time: Time.now, end_time: Time.now + 2.hours, status: 2)
+brussels_booking = Booking.create!(
+  user_id: helene.id,
+  desk_id: brussels_desk.id,
+  start_time: Time.now,
+  end_time: Time.now + 2.hours,
+  status: 2
+)
 
-puts "created bookings"
+puts "created bookings !"
+
+puts "creating reviews ..."
+
+Review.create!(
+  comment: "Great desk, very comfortable and quiet. Perfect for focus work.",
+  rating: 5,
+  user_id: ana.id,
+  desk_id: paris_desk.id
+)
+
+Review.create!(
+  comment: "Nice location but a bit noisy in the afternoon.",
+  rating: 4,
+  user_id: axel.id,
+  desk_id: utrecht_desk.id
+)
+
+puts "reviews created !"

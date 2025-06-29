@@ -9,3 +9,22 @@
 <p> Host: <%= @desk.user.name %></p>
 
 <p><%= link_to "back to all desks", desks_path %></p>
+
+<p> All Reviews:</p>
+<ul>
+  <% @desk.reviews.each do |review| %>
+    <li>
+      "<%= review.comment %>" /
+      rating: <%= "⭐" * review.rating %>
+      name of the reviewer: <%= review.user.name %>
+      <%= link_to "Delete", review_path(review), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }%>
+    </li>
+  <% end %>
+</ul>
+
+<%= link_to "Add a Review", new_desk_review_path(@desk) %>
+
+<% if flash[:alert] %>
+  <div class="alert"> <%= flash[:alert] %> </div>
+<% end %>
+

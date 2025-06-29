@@ -30,6 +30,7 @@ class DesksController < ApplicationController
       render :edit, status: :unprocessable_entity
     end
   end
+
   private
 
   def desk_params
