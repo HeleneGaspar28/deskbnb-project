@@ -13,7 +13,7 @@
   <% @desk.reviews.each do |review| %>
     <li>
       "<%= review.comment %>" /
-      <%= review.rating %> stars !
+      rating: <%= "⭐" * review.rating %>
       name of the reviewer: <%= review.user.name %>
       <%= link_to "Delete", review_path(review), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }%>
     </li>
