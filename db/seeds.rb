@@ -8,9 +8,10 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
+Review.destroy_all
 Booking.destroy_all
-User.destroy_all
 Desk.destroy_all
+User.destroy_all
 
 puts "creating users..."
 
@@ -41,3 +42,20 @@ utrecht_booking = Booking.create!(user_id: axel.id, desk_id: utrecht_desk.id, st
 brussels_booking = Booking.create!(user_id: helene.id, desk_id: brussels_desk.id, start_time: Time.now, end_time: Time.now + 2.hours, status: 2)
 
 puts "created bookings"
+
+puts "creating reviews ..."
+Review.create!(
+  comment: "Great desk, very comfortable and quiet. Perfect for focus work.",
+  rating: 5,
+  user_id: ana.id,
+  desk_id: paris_desk.id
+)
+
+Review.create!(
+  comment: "Nice location but a bit noisy in the afternoon.",
+  rating: 4,
+  user_id: axel.id,
+  desk_id: utrecht_desk.id
+)
+
+puts "reviews created !"
