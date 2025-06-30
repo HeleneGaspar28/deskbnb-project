@@ -3,6 +3,9 @@ Rails.application.routes.draw do
 
   root to: "desks#index"
 
-  resources :desks, only: [:new, :create, :update, :index, :show]
+  resources :desks, only: [:new, :create, :update, :index, :show] do
+    resources :reviews, only: [:new, :create]
+  end
   resources :bookings, only: [:create, :index, :show]
+  resources :reviews, only: [:destroy]
 end
