@@ -1,6 +1,14 @@
 class DesksController < ApplicationController
   def index
     @desks = Desk.all
+
+    @markers = @desks.geocoded.map do |desk|
+      {
+        lat: desk.latitude,
+        lng: desk.longitude,
+        info_window: render_to_string(partial: "desks/popup", locals: { desk: desk })
+      }
+    end
   end
 
   def show
@@ -30,6 +38,7 @@ class DesksController < ApplicationController
       render :edit, status: :unprocessable_entity
     end
   end
+
   private
 
   def desk_params
