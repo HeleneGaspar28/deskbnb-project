@@ -1,6 +1,14 @@
 class DesksController < ApplicationController
   def index
     @desks = Desk.all
+
+    @markers = @desks.geocoded.map do |desk|
+      {
+        lat: desk.latitude,
+        lng: desk.longitude,
+        info_window: render_to_string(partial: "desks/info_window", locals: { desk: desk })
+      }
+    end
   end
 
   def show

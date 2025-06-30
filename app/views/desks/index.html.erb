@@ -1,5 +1,14 @@
 <h1>DeskBnB</h1>
 <h2>Here you can see all the desks available</h2>
+<%# geocoding %>
+<div
+  id='map'
+  data-controller="map"
+  data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"
+  data-map-markers-value="<%= @markers.to_json %>"
+  style='width: 80%; height: 500px;'>
+</div>
+
 <ul>
   <% @desks.each do |desk| %>
    <li><h3><%= desk.title %></h3>
