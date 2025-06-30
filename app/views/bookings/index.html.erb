@@ -7,29 +7,7 @@
     <p>Start: <%= booking.start_time %></p>
     <p>End: <%= booking.end_time %></p>
     <p>Status: <%= booking.status %></p>
-
-    <!-- Update Form -->
-    <%= form_with model: booking, url: booking_path(booking), method: :patch, local: true do |f| %>
-      <div>
-        <%= f.label :start_time %><br>
-        <%= f.datetime_select :start_time %>
-      </div>
-
-      <div>
-        <%= f.label :end_time %><br>
-        <%= f.datetime_select :end_time %>
-      </div>
-
-      <div>
-        <%= f.label :status %><br>
-        <%= f.select :status, ['pending', 'confirmed', 'cancelled'] %>
-      </div>
-
-      <div>
-        <%= f.submit "Update Booking" %>
-      </div>
-    <% end %>
-    <!-- End of Update Form -->
+    <%= link_to 'Update', edit_booking_path(booking), class: 'btn btn-primary' %>
 
   </div>
 <% end %>
