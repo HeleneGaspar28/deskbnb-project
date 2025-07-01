@@ -11,11 +11,13 @@ class BookingsController < ApplicationController
 
   def create
     @booking = current_user.bookings.new(booking_params)
+    @desk = Desk.find(params[:desk_id])
+    @booking.desk = @desk
 
     if @booking.save
       redirect_to bookings_path, notice: "Booking created successfully."
     else
-      render :new, status: :unprocessable_entity
+      redirect_to bookings_path, alert: "Booking failed. Please check your input."
     end
   end
 
