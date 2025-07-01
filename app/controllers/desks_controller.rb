@@ -40,6 +40,10 @@ class DesksController < ApplicationController
     end
   end
 
+  def mydesks
+    @desks = current_user.desks
+  end
+
   private
 
   def desk_params
