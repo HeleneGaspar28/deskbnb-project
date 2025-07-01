@@ -1,4 +1,5 @@
 class ReviewsController < ApplicationController
+  before_action :authenticate_user!
   def new
     @review = Review.new
     @desk = Desk.find(params[:desk_id])
@@ -8,7 +9,6 @@ class ReviewsController < ApplicationController
     @review = Review.new(review_params)
     @desk = Desk.find(params[:desk_id])
     @review.desk = @desk
-    @review.user_id = current_user.id
     if @review.save
       redirect_to desk_path(@desk)
     else

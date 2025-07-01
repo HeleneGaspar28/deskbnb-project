@@ -21,13 +21,17 @@ class DesksController < ApplicationController
   end
 
   def create
-    @desk = Desk.new(desk_params)
-    @desk.user = current_user
+    if current_user != nil
+      @desk = Desk.new(desk_params)
+      @desk.user = current_user
 
-    if @desk.save
-      redirect_to new_desk_path, notice: "Desk created successfully."
+      if @desk.save
+        redirect_to desk_path(@desk), notice: "Desk created successfully."
+      else
+        render :new, status: :unprocessable_entity
+      end
     else
-      render :new, status: :unprocessable_entity
+      redirect_to user_session_path, notice: "You have to login to create a desk."
     end
   end
 
