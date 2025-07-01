@@ -1,10 +1,19 @@
 class DesksController < ApplicationController
   def index
     @desks = Desk.all
+
+    @markers = @desks.geocoded.map do |desk|
+      {
+        lat: desk.latitude,
+        lng: desk.longitude,
+        info_window: render_to_string(partial: "desks/info_window", locals: { desk: desk })
+      }
+    end
   end
 
   def show
     @desk = Desk.find(params[:id])
+    @booking = Booking.new
   end
 
   def new
@@ -29,6 +38,10 @@ class DesksController < ApplicationController
     else
       render :edit, status: :unprocessable_entity
     end
+  end
+
+  def mydesks
+    @desks = current_user.desks
   end
 
   private
