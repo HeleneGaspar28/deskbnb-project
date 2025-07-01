@@ -22,7 +22,7 @@ export default class extends Controller {
       new MapboxGeocoder({ accessToken: mapboxgl.accessToken, mapboxgl: mapboxgl })
     );
 
-    // now the map is initialized — safe to use it
+    // now the map is initialized - conditionally add markers if they exist
     if (this.hasMarkersValue) {
       console.log("Markers:", this.markersValue);
       this.#addMarkersToMap();
@@ -37,6 +37,7 @@ export default class extends Controller {
     console.log("Markers received:", this.markersValue)
 
     this.markersValue.forEach((marker) => {
+      // in case we will use a custom marker in the future:
       // const customMarker = document.createElement("div")
       // customMarker.style.height = "30px"
       // customMarker.style.width = "30px"
