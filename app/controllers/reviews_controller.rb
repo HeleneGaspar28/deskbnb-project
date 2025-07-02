@@ -6,9 +6,10 @@ class ReviewsController < ApplicationController
   end
 
   def create
-    @review = Review.new(review_params)
     @desk = Desk.find(params[:desk_id])
+    @review = Review.new(review_params)
     @review.desk = @desk
+    @review.user = current_user
     if @review.save
       redirect_to desk_path(@desk)
     else
