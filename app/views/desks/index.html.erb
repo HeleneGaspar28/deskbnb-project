@@ -1,30 +1,43 @@
-<div class="container text-center">
-  <h1>DeskBnB</h1>
-  <h2>Book - Study - Work</h2>
-</div>
-
-<%# geocoding %>
-<div
-  id='map'
-  data-controller="map"
-  data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"
-  data-map-markers-value="<%= @markers.to_json %>"
-  style='width: 100%; height: 450px;'>
-</div>
-
-
-<div class="container text-center py-5">
-  <div class="row row-cols-3">
-    <% @desks.each do |desk| %>
-      <div class="col">
-        <h3><%= desk.title %></h3>
-        <p>location: <%= desk.address %> - price per hour: <%= desk.price_per_hour %> € </p>
-        <p><%= link_to "See the desk in details", desk_path(desk) %></p>
-        </div>
-    <% end %>
+<!-- Banner -->
+<div class="banner text-center">
+  <div class="container">
+    <h1><strong>DeskBnB</strong></h1>
+    <p>Work – Study anywhere</p>
   </div>
 </div>
 
-<div class="container text-center py-5">
-  <p><%= link_to "Create a new desk", new_desk_path %></p>
+<!-- Main Layout -->
+<div class="container-fluid px-0">
+  <div class="d-flex flex-column flex-lg-row" style="min-height: 100vh;">
+
+    <!-- Desks List -->
+    <div class="w-100 w-lg-50 overflow-auto p-4 bg-light" style="max-height: 100vh;">
+      <h2 class="mb-4">Available desks</h2>
+      <div class="row row-cols-1 g-3">
+        <% @desks.each do |desk| %>
+          <div class="col">
+            <div class="card-product p-4 border rounded-5 shadow-sm bg-white">
+              <div class="card-product-infos">
+                <h4><%= desk.title %></h4>
+                <p>Location: <%= desk.address %></p>
+                <p>Price per hour: <%= desk.price_per_hour %> €</p>
+                <%= link_to "See details", desk_path(desk), class: "btn btn-ghost mt-2" %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- Map Section -->
+    <div class="w-100 w-lg-50 position-sticky top-0" style="height: 100vh;">
+      <div
+        id='map'
+        data-controller="map"
+        data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"
+        data-map-markers-value="<%= @markers.to_json %>"
+        style='width: 100%; height: 100%;'>
+      </div>
+    </div>
+  </div>
 </div>
