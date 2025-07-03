@@ -8,20 +8,22 @@
 
 <p> Host: <%= @desk.user.name %></p>
 
-<h2>Book this desk</h2>
+<% if current_user.id != @desk.user_id %>
+  <h2>Book this desk</h2>
 
-<%= simple_form_for [@desk, @booking] do |f| %>
-  <div>
-    <%= f.input :start_time, as: :string, input_html: { data: { controller: "datepicker" } } %>
-  </div>
+  <%= simple_form_for [@desk, @booking] do |f| %>
+    <div>
+      <%= f.input :start_time, as: :string, input_html: { data: { controller: "datepicker" } } %>
+    </div>
 
-  <div>
-    <%= f.input :end_time, as: :string, input_html: { data: { controller: "datepicker" } } %>
-  </div>
+    <div>
+      <%= f.input :end_time, as: :string, input_html: { data: { controller: "datepicker" } } %>
+    </div>
 
-  <div>
-    <%= f.button :submit, "Book now" %>
-  </div>
+    <div>
+      <%= f.button :submit, "Book now" %>
+    </div>
+  <% end %>
 <% end %>
 
 <p><%= link_to "back to all desks", desks_path %></p>
@@ -38,7 +40,9 @@
   <% end %>
 </ul>
 
-<%= link_to "Add a Review", new_desk_review_path(@desk) %>
+<% if current_user.id != @desk.user_id %>
+  <%= link_to "Add a Review", new_desk_review_path(@desk) %>
+<% end %>
 
 <% if flash[:alert] %>
   <div class="alert"> <%= flash[:alert] %> </div>
