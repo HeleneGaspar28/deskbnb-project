@@ -1,21 +1,25 @@
-<h1>List Your Desk</h1>
+<div class="mx-auto" style="max-width: 600px;">
+  <h1 class="text-center my-4">List Your Desk</h1>
 
-<%= simple_form_for @desk do |f| %>
-  <%= f.input :title %>
-  <%= f.input :description %>
-  <%= f.input :price_per_hour %>
-  <%= f.input :address,
-    input_html: {
-      data: { address_autocomplete_target: "address" },
-      class: "d-none"
-    },
-    wrapper_html: {
-      data: {
-        controller: "address-autocomplete",
-        address_autocomplete_api_key_value: ENV["MAPBOX_API_KEY"]
+  <%= simple_form_for @desk do |f| %>
+    <%= f.input :title %>
+    <%= f.input :description %>
+    <%= f.input :price_per_hour %>
+    <%= f.input :address,
+      input_html: {
+        data: { address_autocomplete_target: "address" },
+        class: "d-none"
+      },
+      wrapper_html: {
+        data: {
+          controller: "address-autocomplete",
+          address_autocomplete_api_key_value: ENV["MAPBOX_API_KEY"]
+        }
       }
-    }
-  %>
+    %>
 
-  <%= f.button :submit, "Create Desk" %>
-<% end %>
+    <div class="d-flex justify-content-center mt-3">
+      <%= f.button :submit, "Create Desk", class: "btn btn-flat mb-4" %>
+    </div>
+  <% end %>
+</div>
