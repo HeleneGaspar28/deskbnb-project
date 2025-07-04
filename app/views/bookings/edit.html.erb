@@ -1,22 +1,24 @@
-<h1>Edit Booking</h1>
+<div class="container mt-5">
+  <h1 class="mb-4 text-center">Edit Your Booking</h1>
 
-<%= form_with model: @booking, local: true do |form| %>
-  <div>
-    <%= form.label :start_time %><br>
-    <%= form.datetime_select :start_time %>
-  </div>
+  <%= form_with model: @booking, local: true, class: "card p-4 shadow-sm" do |form| %>
+    <div class="mb-3">
+      <%= form.label :start_time, class: "form-label" %>
+      <%= form.datetime_select :start_time, class: "form-control" %>
+    </div>
 
-  <div>
-    <%= form.label :end_time %><br>
-    <%= form.datetime_select :end_time %>
-  </div>
+    <div class="mb-3">
+      <%= form.label :end_time, class: "form-label" %>
+      <%= form.datetime_select :end_time, class: "form-control" %>
+    </div>
 
-  <div>
-    <%= form.label :status %><br>
-    <%= form.select :status, ['pending', 'accepted', 'declined', 'cancelled'] %>
-  </div>
+    <div class="mb-3">
+      <%= form.label :status, class: "form-label" %>
+      <%= form.select :status, ['pending', 'accepted', 'declined', 'cancelled'], {}, class: "form-select" %>
+    </div>
 
-  <div>
-    <%= form.submit "Update Booking", class: "btn btn-success" %>
-  </div>
-<% end %>
+    <div class="text-center">
+      <%= form.submit "Update Booking", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>
