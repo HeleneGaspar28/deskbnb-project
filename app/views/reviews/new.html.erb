@@ -1,7 +1,11 @@
-<h1>Write a review for <%= @desk.title %> Desk</h1>
+<div class="mx-auto" style="max-width: 600px;">
+  <h1 class="text-center my-4">Write a review for <%= @desk.title %> Desk</h1>
 
-<%= simple_form_for([@desk, @review]) do |f| %>
-  <%= f.input :comment %>
-  <%= f.input :rating %>
-  <%= f.submit "Submit review", class: "btn btn-primary" %>
-<% end %>
+  <%= simple_form_for([@desk, @review]) do |f| %>
+    <%= f.input :comment %>
+    <%= f.input :rating %>
+    <div class="d-flex justify-content-center mt-3">
+      <%= f.submit "Submit review", class: "btn btn-flat mb-4" %>
+    </div>
+  <% end %>
+</div>
