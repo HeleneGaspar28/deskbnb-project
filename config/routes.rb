@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   root to: "pages#home"
 
-  resources :desks, only: [:new, :create, :update, :index, :show] do
+  resources :desks, only: [:new, :create, :update, :index, :show, :destroy] do
     collection do
       get :mydesks
     end
