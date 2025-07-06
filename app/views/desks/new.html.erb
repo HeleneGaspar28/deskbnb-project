@@ -12,7 +12,7 @@
       <div class="row row-cols-1 g-3">
         <%= simple_form_for @desk do |f| %>
 
-          <div class="form-group  mb-3">
+          <div class="form-group">
             <%= f.input :title %>
           </div>
 
@@ -37,6 +37,9 @@
                 }
               }
             %>
+          </div>
+          <div class="form-group">
+            <%= f.input :photo, as: :file, label: "Desk Photo" %>
           </div>
 
           <div class="form-actions">
