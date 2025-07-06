@@ -1,39 +1,48 @@
-<div class="container-product">
-  <div class="card-product desk-form">
+<div class="container-fluid px-0">
 
-    <%= simple_form_for @desk do |f| %>
-    <h1 class="form-title">List Your Desk</h1>
+  <!-- Page title -->
+  <div class="bg-light py-4 text-center">
+    <h1 class="mb-0">List Your Desk</h1>
+  </div>
 
-      <div class="form-group">
-        <%= f.input :title %>
-      </div>
+  <div class="p-4 bg-light min-vh-100">
 
-      <div class="form-group">
-        <%= f.input :description %>
-      </div>
+    <!-- Desk Creation Form -->
+    <div class="booking-form p-4 border rounded-5 shadow-sm bg-white mb-4">
+      <div class="row row-cols-1 g-3">
+        <%= simple_form_for @desk do |f| %>
 
-      <div class="form-group">
-        <%= f.input :price_per_hour %>
-      </div>
+          <div class="form-group  mb-3">
+            <p><%= f.input :title %></p>
+          </div>
 
-      <div class="form-group geocoder-wrapper">
-        <%= f.input :address,
-          input_html: {
-            data: { address_autocomplete_target: "address" },
-            class: "d-none"
-          },
-          wrapper_html: {
-            data: {
-              controller: "address-autocomplete",
-              address_autocomplete_api_key_value: ENV["MAPBOX_API_KEY"]
-            }
-          }
-        %>
-      </div>
+          <div class="form-group">
+            <p><%= f.input :description %></p>
+          </div>
 
-      <div class="form-actions">
-        <%= f.button :submit, "Create Desk", class: "btn btn-flat" %>
-      </div>
-    <% end %>
+          <div class="form-group">
+            <p><%= f.input :price_per_hour %></p>
+          </div>
+
+          <div class="form-group geocoder-wrapper">
+            <%= f.input :address,
+              input_html: {
+                data: { address_autocomplete_target: "address" },
+                class: "d-none"
+              },
+              wrapper_html: {
+                data: {
+                  controller: "address-autocomplete",
+                  address_autocomplete_api_key_value: ENV["MAPBOX_API_KEY"]
+                }
+              }
+            %>
+          </div>
+
+          <div class="form-actions">
+            <%= f.button :submit, "Create Desk", class: "btn btn-flat" %>
+          </div>
+        <% end %>
+    </div>
   </div>
 </div>
