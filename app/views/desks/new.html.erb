@@ -13,15 +13,15 @@
         <%= simple_form_for @desk do |f| %>
 
           <div class="form-group  mb-3">
-            <p><%= f.input :title %></p>
+            <%= f.input :title %>
           </div>
 
           <div class="form-group">
-            <p><%= f.input :description %></p>
+            <%= f.input :description %>
           </div>
 
           <div class="form-group">
-            <p><%= f.input :price_per_hour %></p>
+            <%= f.input :price_per_hour %>
           </div>
 
           <div class="form-group geocoder-wrapper">
