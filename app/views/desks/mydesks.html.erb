@@ -1,12 +1,20 @@
-<div class="banner">
-  <div><h2>My Desks</h2></div>
+<!-- Banner -->
+<div class="banner text-center">
+  <div class="container my-4">
+    <h1><strong>My Desks</strong></h1>
+  </div>
 </div>
+
 
 <% if @desks.any? %>
   <div class="row row-cols-1 g-3">
     <% @desks.each do |desk| %>
       <div class="col">
         <div class="card-product p-4 border rounded-5 shadow-sm bg-white">
+          <!-- Desk Photo -->
+          <% if desk.photo.attached? %>
+            <%= image_tag desk.photo, class: "img-fluid rounded mb-3" %>
+          <% end %>
           <div class="card-product-infos">
             <h3><strong><%= link_to desk.title, desk_path(desk) %></strong></h3>
             <p>Location: <%= desk.address %></p>
