@@ -48,6 +48,12 @@ class DesksController < ApplicationController
     @desks = current_user.desks
   end
 
+  def destroy
+    @desk = Desk.find(params[:id])
+    @desk.destroy
+    redirect_to mydesks_desks_path, notice: "Desk was successfully deleted."
+  end
+
   private
 
   def desk_params
