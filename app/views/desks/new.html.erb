@@ -12,16 +12,16 @@
       <div class="row row-cols-1 g-3">
         <%= simple_form_for @desk do |f| %>
 
-          <div class="form-group  mb-3">
-            <p><%= f.input :title %></p>
+          <div class="form-group">
+            <%= f.input :title %>
           </div>
 
           <div class="form-group">
-            <p><%= f.input :description %></p>
+            <%= f.input :description %>
           </div>
 
           <div class="form-group">
-            <p><%= f.input :price_per_hour %></p>
+            <%= f.input :price_per_hour %>
           </div>
 
           <div class="form-group geocoder-wrapper">
@@ -37,6 +37,9 @@
                 }
               }
             %>
+          </div>
+          <div class="form-group">
+            <%= f.input :photo, as: :file, label: "Desk Photo" %>
           </div>
 
           <div class="form-actions">

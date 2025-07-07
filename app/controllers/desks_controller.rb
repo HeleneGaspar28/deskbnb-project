@@ -51,6 +51,6 @@ class DesksController < ApplicationController
   private
 
   def desk_params
-    params.require(:desk).permit(:title, :description, :price_per_hour, :address)
+    params.require(:desk).permit(:title, :description, :price_per_hour, :address, :photo)
   end
 end
