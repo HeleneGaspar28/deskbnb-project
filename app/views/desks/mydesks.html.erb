@@ -1,16 +1,23 @@
-<h1>My Desks</h1>
+<div class="banner">
+  <div><h2>My Desks</h2></div>
+</div>
 
 <% if @desks.any? %>
-  <ul>
+  <div class="row row-cols-1 g-3">
     <% @desks.each do |desk| %>
-      <li>
-        <strong><%= link_to desk.title, desk_path(desk) %></strong><br>
-        Location: <%= desk.address %><br>
-        Price per hour: <%= desk.price_per_hour %> €<br>
-        <%= link_to "Delete", desk_path(desk), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
-      </li>
+      <div class="col">
+        <div class="card-product p-4 border rounded-5 shadow-sm bg-white">
+          <div class="card-product-infos">
+            <h3><strong><%= link_to desk.title, desk_path(desk) %></strong></h3>
+            <p>Location: <%= desk.address %></p>
+            <p>Price per hour: <%= desk.price_per_hour %> €</p>
+            <p><%= link_to "Delete", desk_path(desk), class: "btn btn-outline-danger rounded mt-2", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %></p>
+          </div>
+        </div>
+      </div>
     <% end %>
-  </ul>
+  </div>
+
 <% else %>
   <p>You haven't listed any desks yet.</p>
   <%= link_to "Add a new desk", new_desk_path %>

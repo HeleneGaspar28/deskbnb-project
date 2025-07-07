@@ -44,3 +44,39 @@
   line-height: 1.4;
   font-family: 'Nunito', sans-serif;
 }
+
+// desks#show styles
+.card-product.desk-details {
+  display: flex;
+  align-items: stretch;
+  margin-bottom: 20px;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+
+  img {
+    width: 250px;
+    object-fit: cover;
+    height: 100%;
+  }
+
+  .card-product-infos {
+    padding: 24px;
+    flex: 1;
+
+    h1 {
+      font-size: 28px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    p {
+      margin: 6px 0;
+      color: #555;
+
+      strong {
+        color: #333;
+      }
+    }
+  }
+}
