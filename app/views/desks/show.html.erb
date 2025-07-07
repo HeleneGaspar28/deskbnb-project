@@ -1,60 +1,80 @@
-<div class="container-product">
-  <div class="card-product desk-details">
-    <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" />
-    <div class="card-product-infos">
-      <h1 class="desk-title"> Name: <%= @desk.title %></h1>
 
-      <p> Description: <%= @desk.description %></p>
-      <p> Location: <%= @desk.address %></p>
-      <p> Price per hour: <%= @desk.price_per_hour %> €</p>
-      <p> Host: <%= @desk.user.name %></p>
+<div class="container-fluid px-0">
+
+  <!-- Page title -->
+  <div class="bg-light py-4 text-center">
+    <h1 class="mb-0">Desk Details</h1>
+  </div>
+
+  <div class="p-4 bg-light min-vh-100">
+
+    <!-- Desk Card -->
+    <div class="card-product desk-details p-4 border rounded-5 shadow-sm bg-white mb-4">
+      <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" class="img-fluid rounded mb-3" />
+      <div class="card-product-infos">
+        <h2 class="desk-title"><%= @desk.title %></h2>
+        <p><strong>Description:</strong> <%= @desk.description %></p>
+        <p><strong>Location:</strong> <%= @desk.address %></p>
+        <p><strong>Price per hour:</strong> <%= @desk.price_per_hour %> €</p>
+        <p><strong>Host:</strong> <%= @desk.user.name %></p>
+      </div>
+    </div>
+
+    <!-- Booking Form -->
+    <% if current_user && current_user.id != @desk.user_id %>
+      <div class="booking-form p-4 border rounded-5 shadow-sm bg-white mb-4">
+        <h3>Book this desk</h3>
+        <%= simple_form_for [@desk, @booking] do |f| %>
+          <div class="form-group">
+            <%= f.input :start_time, as: :string, input_html: { data: { controller: "datepicker" } } %>
+          </div>
+
+          <div class="form-group">
+            <%= f.input :end_time, as: :string, input_html: { data: { controller: "datepicker" } } %>
+          </div>
+
+          <div class="form-action">
+            <%= f.button :submit, "Book now", class: "btn btn-flat" %>
+          </div>
+        <% end %>
+      </div>
+    <% elsif current_user.nil? %>
+      <div class="p-4 border rounded-5 shadow-sm bg-white mb-4">
+        <p>
+          <%= link_to "Log in to book this desk", new_user_session_path, class: "btn btn-outline-primary" %>
+        </p>
+      </div>
+    <% end %>
+
+    <!-- Reviews -->
+    <div class="reviews-container p-4 border rounded-5 shadow-sm bg-white mb-4">
+      <h4>All Reviews</h4>
+      <ul class="reviews-list list-unstyled">
+        <% @desk.reviews.each do |review| %>
+          <li class="review-card border rounded p-3 mb-2 bg-light shadow-sm">
+            <p>"<%= review.comment %>"</p>
+            <p><strong>Rating:</strong> <%= "⭐" * review.rating %></p>
+            <p><strong>Reviewer:</strong> <%= review.user.name %></p>
+            <%= link_to "Delete", review_path(review), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-outline-danger btn-sm" %>
+          </li>
+        <% end %>
+      </ul>
+
+      <% if current_user && current_user.id != @desk.user_id %>
+        <%= link_to "Add a Review", new_desk_review_path(@desk), class: "btn btn-success mt-2" %>
+      <% elsif current_user.nil? %>
+        <%= link_to "Log in to leave a review", new_user_session_path, class: "btn btn-outline-primary mt-2" %>
+      <% end %>
+    </div>
+
+    <!-- Flash message -->
+    <% if flash[:alert] %>
+      <div class="alert alert-warning mt-3"> <%= flash[:alert] %> </div>
+    <% end %>
+
+    <!-- Back button -->
+    <div class="mt-3">
+      <%= link_to "Back to all desks", desks_path, class: "btn btn-light" %>
     </div>
   </div>
-
-  <% if current_user.id != @desk.user_id %>
-  <div class="booking-form">
-    <h2>Book this desk</h2>
-
-    <%= simple_form_for [@desk, @booking] do |f| %>
-      <div class="form-group">
-        <%= f.input :start_time, as: :string, input_html: { data: { controller: "datepicker" } } %>
-      </div>
-
-      <div class="form-group">
-        <%= f.input :end_time, as: :string, input_html: { data: { controller: "datepicker" } } %>
-      </div>
-
-      <div class="form-action">
-        <%= f.button :submit, "Book now", class: "btn btn-primary" %>
-      </div>
-    <% end %>
-  </div>
-  <% end %>
-
-  <p><%= link_to "back to all desks", desks_path, class:"btn btn-light mt-2" %></p>
-
-  <hr>
-  <div class="reviews-container">
-  <p> All Reviews:</p>
-  <ul class="reviews-list">
-    <% @desk.reviews.each do |review| %>
-      <li class="review-card">
-      <div class="review-content">
-        <p>"<%= review.comment %>"</p>
-        <p><strong>Rating:</strong> <%= "⭐" * review.rating %></p>
-        <p><strong>Name of the reviewer:</strong> <%= review.user.name %></p>
-        <%= link_to "Delete", review_path(review), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-outline-danger btn-sm"%>
-      </div>
-      </li>
-    <% end %>
-  </ul>
-
-  <% if current_user.id != @desk.user_id %>
-    <%= link_to "Add a Review", new_desk_review_path(@desk), class: "btn btn-success mt-2" %>
-  <% end %>
-  </div>
-
-  <% if flash[:alert] %>
-    <div class="alert"> <%= flash[:alert] %> </div>
-  <% end %>
 </div>
