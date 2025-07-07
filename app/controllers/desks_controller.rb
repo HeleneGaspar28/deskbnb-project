@@ -1,6 +1,10 @@
 class DesksController < ApplicationController
   def index
-    @desks = Desk.all
+    if params[:query].present?
+      @desks = Desk.search_by_title_description_and_address(params[:query])
+    else
+      @desks = Desk.all
+    end
 
     @markers = @desks.geocoded.map do |desk|
       {
