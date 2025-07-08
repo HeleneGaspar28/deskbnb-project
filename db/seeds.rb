@@ -7,6 +7,7 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+require "open-uri"
 
 Review.destroy_all
 Booking.destroy_all
@@ -25,6 +26,13 @@ puts "Users created !"
 
 puts "creating desks ..."
 
+# images URLs for the desks
+image_urls = [
+  "https://images.unsplash.com/photo-1594235048794-fae8583a5af5?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1618506469810-282bef2b30b3?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1654356709115-3f68998bead4?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+]
+
 brussels_desk = Desk.create!(
   title: "Brussels",
   description: "nice and cosy desk",
@@ -32,6 +40,8 @@ brussels_desk = Desk.create!(
   address: "Brussels",
   user_id: axel.id
 )
+file = URI.open(image_urls[0])
+brussels_desk.photo.attach(io: file, filename: "brussels.jpg", content_type: "image/jpg")
 
 utrecht_desk = Desk.create!(
   title: "Utrecht",
@@ -40,6 +50,8 @@ utrecht_desk = Desk.create!(
   address: "Utrecht",
   user_id: ana.id
 )
+file = URI.open(image_urls[1])
+utrecht_desk.photo.attach(io: file, filename: "utrecht.jpg", content_type: "image/jpg")
 
 paris_desk = Desk.create!(
   title: "Paris",
@@ -48,6 +60,8 @@ paris_desk = Desk.create!(
   address: "Paris",
   user_id: helene.id
 )
+file = URI.open(image_urls[2])
+paris_desk.photo.attach(io: file, filename: "paris.jpg", content_type: "image/jpg")
 
 puts "created desks !"
 
