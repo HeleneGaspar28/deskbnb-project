@@ -11,7 +11,7 @@
       <!-- Desk Details -->
       <div class="card-product desk-details p-4 border rounded-5 shadow-sm bg-white mb-4">
         <% if @desk.photo.attached? %>
-          <%= cl_image_tag @desk.photo.key, class: "img-fluid rounded mb-3" %>
+          <%= cl_image_tag @desk.photo.key, class: "img-fluid rounded mb-3 d-block mx-auto", style: "margin-top: 25px;" %>
         <% end %>
 
         <div class="card-product-infos">
@@ -26,13 +26,15 @@
       <!-- Reviews -->
       <div class="reviews-container p-4 border rounded-5 shadow-sm bg-white mb-4">
         <h4>All Reviews</h4>
-        <ul class="reviews-list list-unstyled">
+        <ul class="reviews-list list-unstyled ">
           <% @desk.reviews.each do |review| %>
-            <li class="review-card border rounded-5 p-3 bg-light shadow-sm">
-              <p>"<%= review.comment %>"</p>
-              <p><strong>Rating:</strong> <%= "⭐" * review.rating %></p>
-              <p><strong>Reviewer:</strong> <%= review.user.name %></p>
-              <%= link_to "Delete", review_path(review), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-outline-danger btn-sm rounded-4" %>
+            <li class="review-card border rounded-5 p-3 bg-light shadow-sm ">
+              <p class="review-item mb-0">"<%= review.comment %>"</p>
+              <p class="review-item mb-0"><strong>Rating:</strong> <%= "⭐" * review.rating %></p>
+              <p class="review-item mb-0"><strong>Reviewer:</strong> <%= review.user.name %></p>
+              <div class="delete-button ms-auto">
+                <%= link_to "Delete", review_path(review), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-outline-danger btn-sm rounded-4" %>
+              </div>
             </li>
           <% end %>
         </ul>
