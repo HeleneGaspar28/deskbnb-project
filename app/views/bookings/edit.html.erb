@@ -1,24 +1,25 @@
-<div class="container mt-5">
-  <h1 class="mb-4 text-center">Edit Your Booking</h1>
+<div class="container mt-2">
+  <div class="banner text-center">
+    <div class="container">
+      <h1><strong>Edit your booking</strong></h1>
+    </div>
+  </div>
 
-  <%= form_with model: @booking, local: true, class: "card p-4 shadow-sm" do |form| %>
+  <%= simple_form_for @booking, html: { class: "card p-4 shadow-sm rounded-5 my-4" } do |f| %>
     <div class="mb-3">
-      <%= form.label :start_time, class: "form-label" %>
-      <%= form.datetime_select :start_time, class: "form-control" %>
+      <%= f.input :start_time, as: :string, input_html: { data: { controller: "datepicker" } } %>
     </div>
 
     <div class="mb-3">
-      <%= form.label :end_time, class: "form-label" %>
-      <%= form.datetime_select :end_time, class: "form-control" %>
+      <%= f.input :end_time, as: :string, input_html: { data: { controller: "datepicker" } } %>
     </div>
 
     <div class="mb-3">
-      <%= form.label :status, class: "form-label" %>
-      <%= form.select :status, ['pending', 'accepted', 'declined', 'cancelled'], {}, class: "form-select" %>
+      <%= f.input :status, as: :select, collection: ['pending', 'accepted', 'declined', 'cancelled'], label: "Status", input_html: { class: "form-select" } %>
     </div>
 
     <div class="text-center">
-      <%= form.submit "Update Booking", class: "btn btn-primary" %>
+      <%= f.button :submit, "Update Booking", class: "btn btn-flat" %>
     </div>
   <% end %>
 </div>

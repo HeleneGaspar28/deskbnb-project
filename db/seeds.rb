@@ -109,4 +109,11 @@ Review.create!(
   desk_id: utrecht_desk.id
 )
 
+Review.create!(
+  comment: "Nice location and good chairs.",
+  rating: 4,
+  user_id: helene.id,
+  desk_id: brussels_desk.id
+)
+
 puts "reviews created !"
