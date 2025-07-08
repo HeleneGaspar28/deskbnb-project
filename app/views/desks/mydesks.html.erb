@@ -7,25 +7,29 @@
 
 
 <% if @desks.any? %>
-  <div class="row row-cols-1 g-3">
-    <% @desks.each do |desk| %>
-      <div class="col">
-        <div class="card-product p-4 border rounded-5 shadow-sm bg-white">
-          <!-- Desk Photo -->
-          <% if desk.photo.attached? %>
-            <%= image_tag desk.photo, class: "img-fluid rounded mb-3" %>
-          <% end %>
-          <div class="card-product-infos">
-            <h3><strong><%= link_to desk.title, desk_path(desk) %></strong></h3>
-            <p>Location: <%= desk.address %></p>
-            <p>Price per hour: <%= desk.price_per_hour %> €</p>
-            <p><%= link_to "Delete", desk_path(desk), class: "btn btn-outline-danger rounded mt-2", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %></p>
+  <div class="container-fluid px-0">
+    <div class="d-flex flex-column flex-lg-row" style="min-height: 100vh;">
+      <div class="w-100 w-lg-50 overflow-auto p-4 bg-light" style="max-height: 100vh;">
+        <div class="row row-cols-1 g-3">
+        <% @desks.each do |desk| %>
+          <div class="col">
+            <div class="card-product p-4 border rounded-5 shadow-sm bg-white">
+              <!-- Desk Photo -->
+              <% if desk.photo.attached? %>
+                <%= image_tag desk.photo, class: "img-fluid rounded mb-3" %>
+              <% end %>
+              <div class="card-product-infos">
+                <h3><strong><%= link_to desk.title, desk_path(desk) %></strong></h3>
+                <p>Location: <%= desk.address %></p>
+                <p>Price per hour: <%= desk.price_per_hour %> €</p>
+                <p><%= link_to "Delete", desk_path(desk), class: "btn btn-outline-danger rounded-4 mt-2", data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %></p>
+              </div>
+            </div>
           </div>
-        </div>
+        <% end %>
       </div>
-    <% end %>
+    </div>
   </div>
-
 <% else %>
   <p>You haven't listed any desks yet.</p>
   <%= link_to "Add a new desk", new_desk_path %>
