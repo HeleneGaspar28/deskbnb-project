@@ -14,7 +14,7 @@
             <div class="card-product p-4 border rounded-5 shadow-sm bg-white">
               <!-- Desk Photo -->
               <% if booking.desk.photo.attached? %>
-                <%= image_tag booking.desk.photo, class: "img-fluid rounded mb-3" %>
+                <%= cl_image_tag booking.desk.photo.key, class: "img-fluid rounded mb-3" %>
               <% end %>
               <div class="card-product-infos">
                 <h2>Desk: <%= booking.desk.title %></h2>
