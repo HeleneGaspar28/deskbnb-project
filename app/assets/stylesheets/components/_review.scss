@@ -5,18 +5,21 @@
   background-color: #ffffff;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  overflow-x: hidden;
 
-  h3 {
+  h4 {
     margin-bottom: 16px;
     font-size: 22px;
   }
 
   .reviews-list {
     .review-card{
-      display: flex;
-      justify-content: center;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr auto;
+      // flex-wrap: wrap;
+      // justify-content: center;
       align-items: center;
-      gap: 40px;
+      gap: 20px;
 
       background-color: #f9f9f9;
       border: 1px solid #eee;
@@ -27,12 +30,14 @@
       .review-item {
         margin: 0;
         text-align: center;
-        white-space: nowrap;
+        white-space: normal;
+        word-break: break-word;
+        // max-width: 100%;
       }
 
       .delete-button {
-        margin-left: auto;
-        white-space: nowrap;
+        margin-left: 0;
+        justify-self: end;
       }
     }
   }
